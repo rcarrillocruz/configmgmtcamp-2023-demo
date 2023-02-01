@@ -15,9 +15,11 @@
       register: ec2_instance_output
 
     - name: Wait for SSH to start
-      ansible.builtin.wait_for: port=22 host={{ ec2_instance_output.instances.0.public_ip_address }} timeout=300
+      ansible.builtin.wait_for:
+        host: "{{ ec2_instance_output.instances.0.public_ip_address }}"
+        port: 22
         delay: 30
-        search_regex=OpenSSH
+        search_regex: OpenSSH
 
     - name: Display EC2 instance
       ansible.builtin.debug:
