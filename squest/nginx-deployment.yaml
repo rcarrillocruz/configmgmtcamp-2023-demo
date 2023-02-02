@@ -37,23 +37,18 @@ spec:
           volumeMounts:
             - mountPath: /app/media
               name: django-media
-              readOnly: true
             - mountPath: /app/static
               name: django-static
-              readOnly: true
             - mountPath: /etc/nginx/squest/
               name: nginx-config
-              readOnly: true
       restartPolicy: Always
       volumes:
         - name: django-media
           persistentVolumeClaim:
             claimName: django-media
-            readOnly: true
         - name: django-static
           persistentVolumeClaim:
             claimName: django-static
-            readOnly: true
         - name: nginx-config
           configMap:
             name: nginx-config
